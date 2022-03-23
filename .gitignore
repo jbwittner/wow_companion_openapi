@@ -105,6 +105,7 @@ dist
 
 .openapi-generator
 .openapi-generator-ignore
+openapitools.json
 git_push.sh
 
-server/java/target
+server_springboot/target
