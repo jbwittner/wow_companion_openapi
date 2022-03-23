@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "generate": "openapi-generator-cli generate -i ../../openapi.yaml -g typescript-axios",
+    "generate": "openapi-generator-cli generate -i ../openapi.yaml -g typescript-axios",
     "clean": "rimraf dist && rimraf node_modules",
-    "delete": "npm run clean && rimraf *.ts && rimraf .npmignore && rimraf .openapi-generator-ignore && rimraf .openapi-generator && rimraf .gitignore",
+    "delete": "npm run clean && rimraf *.ts && rimraf .npmignore && rimraf .openapi-generator-ignore && rimraf .openapi-generator && rimraf .gitignore && rimraf openapitools.json",
     "build": "tsc",
     "deploy": "npm publish"
   },
