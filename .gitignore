@@ -104,4 +104,7 @@ dist
 .tern-port
 
 .openapi-generator
+.openapi-generator-ignore
 git_push.sh
+
+server/java/target

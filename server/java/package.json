@@ -1,0 +1,15 @@
+{
+    "name": "@jbwittner/blizzardswagger_wow-retail-api_java",
+    "version": "0.5.3",
+    "scripts": {
+      "generate": "openapi-generator-cli generate -i ../../openapi.yaml -g spring --library=spring-boot --api-package=fr.myguild.server.generated.api --model-package=fr.myguild.server.generated.model --additional-properties=interfaceOnly=true --additional-properties=dateLibrary=java11 --additional-properties=hideGenerationTimestamp=true",
+      "clean": "rimraf target",
+      "delete": "npm run clean && rimraf .openapi-generator && rimraf src && rimraf pom.xml && rimraf README.md",
+      "build": "mvn package",
+      "deploy": "mvn deploy -DaltDeploymentRepository=github::default::https://github.com/jbwittner/wow_companion_openapi"
+    },
+    "devDependencies": {
+        "@openapitools/openapi-generator-cli": "^2.3.2",
+        "rimraf": "^3.0.2"
+    }
+  }
