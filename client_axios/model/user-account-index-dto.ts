@@ -14,7 +14,23 @@
 
 
 
-export * from './api/authentication-api';
-export * from './api/blizzard-data-api';
-export * from './api/user-api';
+/**
+ * 
+ * @export
+ * @interface UserAccountIndexDTO
+ */
+export interface UserAccountIndexDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof UserAccountIndexDTO
+     */
+    'blizzardId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserAccountIndexDTO
+     */
+    'userName': string;
+}
 

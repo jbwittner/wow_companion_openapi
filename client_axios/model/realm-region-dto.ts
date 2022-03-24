@@ -13,8 +13,25 @@
  */
 
 
+import { LocalizedDTO } from './localized-dto';
 
-export * from './api/authentication-api';
-export * from './api/blizzard-data-api';
-export * from './api/user-api';
+/**
+ * 
+ * @export
+ * @interface RealmRegionDTO
+ */
+export interface RealmRegionDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof RealmRegionDTO
+     */
+    'id': number;
+    /**
+     * 
+     * @type {LocalizedDTO}
+     * @memberof RealmRegionDTO
+     */
+    'localizedDTO': LocalizedDTO;
+}
 

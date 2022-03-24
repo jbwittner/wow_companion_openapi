@@ -13,8 +13,25 @@
  */
 
 
+import { CovenantDTO } from './covenant-dto';
 
-export * from './api/authentication-api';
-export * from './api/blizzard-data-api';
-export * from './api/user-api';
+/**
+ * Covenant progress DTO
+ * @export
+ * @interface CovenantProgressDTO
+ */
+export interface CovenantProgressDTO {
+    /**
+     * 
+     * @type {CovenantDTO}
+     * @memberof CovenantProgressDTO
+     */
+    'covenantDTO'?: CovenantDTO;
+    /**
+     * 
+     * @type {number}
+     * @memberof CovenantProgressDTO
+     */
+    'renown_level': number;
+}
 

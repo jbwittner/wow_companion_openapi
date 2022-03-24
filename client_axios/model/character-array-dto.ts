@@ -13,8 +13,19 @@
  */
 
 
+import { CharacterDTO } from './character-dto';
 
-export * from './api/authentication-api';
-export * from './api/blizzard-data-api';
-export * from './api/user-api';
+/**
+ * 
+ * @export
+ * @interface CharacterArrayDTO
+ */
+export interface CharacterArrayDTO {
+    /**
+     * 
+     * @type {Array<CharacterDTO>}
+     * @memberof CharacterArrayDTO
+     */
+    'characterDTOs'?: Array<CharacterDTO>;
+}
 

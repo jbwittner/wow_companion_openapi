@@ -14,7 +14,23 @@
 
 
 
-export * from './api/authentication-api';
-export * from './api/blizzard-data-api';
-export * from './api/user-api';
+/**
+ * 
+ * @export
+ * @interface UserRegistrationParameter
+ */
+export interface UserRegistrationParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRegistrationParameter
+     */
+    'userName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRegistrationParameter
+     */
+    'email': string;
+}
 
