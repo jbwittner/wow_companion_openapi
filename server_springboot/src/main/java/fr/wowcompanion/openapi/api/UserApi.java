@@ -3,10 +3,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-package fr.myguild.server.generated.api;
+package fr.wowcompanion.openapi.api;
 
-import fr.myguild.server.generated.model.UserDTO;
-import fr.myguild.server.generated.model.UserRegistrationParameter;
+import fr.wowcompanion.openapi.model.UserDTO;
+import fr.wowcompanion.openapi.model.UserRegistrationParameter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

@@ -1,4 +1,4 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;

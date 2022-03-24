@@ -1,10 +1,10 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.LocalizedDTO;
+import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -16,22 +16,22 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * CovenantDTO
+ * FactionDTO
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-public class CovenantDTO   {
+public class FactionDTO   {
 
   @JsonProperty("id")
   private Integer id;
 
-  @JsonProperty("mediaURL")
-  private String mediaURL;
+  @JsonProperty("type")
+  private String type;
 
   @JsonProperty("localizedDTO")
   private LocalizedDTO localizedDTO;
 
-  public CovenantDTO id(Integer id) {
+  public FactionDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -50,26 +50,26 @@ public class CovenantDTO   {
     this.id = id;
   }
 
-  public CovenantDTO mediaURL(String mediaURL) {
-    this.mediaURL = mediaURL;
+  public FactionDTO type(String type) {
+    this.type = type;
     return this;
   }
 
   /**
-   * Get mediaURL
-   * @return mediaURL
+   * Get type
+   * @return type
   */
   @NotNull 
-  @Schema(name = "mediaURL", required = true)
-  public String getMediaURL() {
-    return mediaURL;
+  @Schema(name = "type", required = true)
+  public String getType() {
+    return type;
   }
 
-  public void setMediaURL(String mediaURL) {
-    this.mediaURL = mediaURL;
+  public void setType(String type) {
+    this.type = type;
   }
 
-  public CovenantDTO localizedDTO(LocalizedDTO localizedDTO) {
+  public FactionDTO localizedDTO(LocalizedDTO localizedDTO) {
     this.localizedDTO = localizedDTO;
     return this;
   }
@@ -96,23 +96,23 @@ public class CovenantDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CovenantDTO covenantDTO = (CovenantDTO) o;
-    return Objects.equals(this.id, covenantDTO.id) &&
-        Objects.equals(this.mediaURL, covenantDTO.mediaURL) &&
-        Objects.equals(this.localizedDTO, covenantDTO.localizedDTO);
+    FactionDTO factionDTO = (FactionDTO) o;
+    return Objects.equals(this.id, factionDTO.id) &&
+        Objects.equals(this.type, factionDTO.type) &&
+        Objects.equals(this.localizedDTO, factionDTO.localizedDTO);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, mediaURL, localizedDTO);
+    return Objects.hash(id, type, localizedDTO);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CovenantDTO {\n");
+    sb.append("class FactionDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    mediaURL: ").append(toIndentedString(mediaURL)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
     sb.append("}");
     return sb.toString();

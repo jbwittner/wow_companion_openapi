@@ -1,11 +1,11 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.FactionDTO;
-import fr.myguild.server.generated.model.RealmDTO;
+import fr.wowcompanion.openapi.model.FactionDTO;
+import fr.wowcompanion.openapi.model.RealmDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;

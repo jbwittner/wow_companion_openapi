@@ -3,9 +3,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-package fr.myguild.server.generated.api;
+package fr.wowcompanion.openapi.api;
 
-import fr.myguild.server.generated.model.StaticDataDTO;
+import fr.wowcompanion.openapi.model.StaticDataDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

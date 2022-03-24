@@ -1,11 +1,11 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.LocalizedDTO;
-import fr.myguild.server.generated.model.PlayableSpecializationDTO;
+import fr.wowcompanion.openapi.model.LocalizedDTO;
+import fr.wowcompanion.openapi.model.PlayableSpecializationDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;

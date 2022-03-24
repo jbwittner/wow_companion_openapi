@@ -1,11 +1,10 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.FactionDTO;
-import fr.myguild.server.generated.model.LocalizedDTO;
+import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -17,22 +16,22 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * PlayableRaceDTO
+ * RealmCategoryDTO
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-public class PlayableRaceDTO   {
+public class RealmCategoryDTO   {
 
   @JsonProperty("id")
   private Integer id;
 
-  @JsonProperty("factionDTO")
-  private FactionDTO factionDTO;
+  @JsonProperty("slug")
+  private String slug;
 
   @JsonProperty("localizedDTO")
   private LocalizedDTO localizedDTO;
 
-  public PlayableRaceDTO id(Integer id) {
+  public RealmCategoryDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -51,26 +50,26 @@ public class PlayableRaceDTO   {
     this.id = id;
   }
 
-  public PlayableRaceDTO factionDTO(FactionDTO factionDTO) {
-    this.factionDTO = factionDTO;
+  public RealmCategoryDTO slug(String slug) {
+    this.slug = slug;
     return this;
   }
 
   /**
-   * Get factionDTO
-   * @return factionDTO
+   * Get slug
+   * @return slug
   */
-  @NotNull @Valid 
-  @Schema(name = "factionDTO", required = true)
-  public FactionDTO getFactionDTO() {
-    return factionDTO;
+  @NotNull 
+  @Schema(name = "slug", required = true)
+  public String getSlug() {
+    return slug;
   }
 
-  public void setFactionDTO(FactionDTO factionDTO) {
-    this.factionDTO = factionDTO;
+  public void setSlug(String slug) {
+    this.slug = slug;
   }
 
-  public PlayableRaceDTO localizedDTO(LocalizedDTO localizedDTO) {
+  public RealmCategoryDTO localizedDTO(LocalizedDTO localizedDTO) {
     this.localizedDTO = localizedDTO;
     return this;
   }
@@ -97,23 +96,23 @@ public class PlayableRaceDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PlayableRaceDTO playableRaceDTO = (PlayableRaceDTO) o;
-    return Objects.equals(this.id, playableRaceDTO.id) &&
-        Objects.equals(this.factionDTO, playableRaceDTO.factionDTO) &&
-        Objects.equals(this.localizedDTO, playableRaceDTO.localizedDTO);
+    RealmCategoryDTO realmCategoryDTO = (RealmCategoryDTO) o;
+    return Objects.equals(this.id, realmCategoryDTO.id) &&
+        Objects.equals(this.slug, realmCategoryDTO.slug) &&
+        Objects.equals(this.localizedDTO, realmCategoryDTO.localizedDTO);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, factionDTO, localizedDTO);
+    return Objects.hash(id, slug, localizedDTO);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PlayableRaceDTO {\n");
+    sb.append("class RealmCategoryDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    factionDTO: ").append(toIndentedString(factionDTO)).append("\n");
+    sb.append("    slug: ").append(toIndentedString(slug)).append("\n");
     sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
     sb.append("}");
     return sb.toString();

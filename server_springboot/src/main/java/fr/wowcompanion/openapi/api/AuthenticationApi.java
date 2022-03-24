@@ -3,7 +3,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-package fr.myguild.server.generated.api;
+package fr.wowcompanion.openapi.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,16 +1,16 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.CovenantDTO;
-import fr.myguild.server.generated.model.FactionDTO;
-import fr.myguild.server.generated.model.PlayableClassDTO;
-import fr.myguild.server.generated.model.PlayableRaceDTO;
-import fr.myguild.server.generated.model.PlayableSpecializationDTO;
-import fr.myguild.server.generated.model.RealmDTO;
-import fr.myguild.server.generated.model.SpecializationRoleDTO;
+import fr.wowcompanion.openapi.model.CovenantDTO;
+import fr.wowcompanion.openapi.model.FactionDTO;
+import fr.wowcompanion.openapi.model.PlayableClassDTO;
+import fr.wowcompanion.openapi.model.PlayableRaceDTO;
+import fr.wowcompanion.openapi.model.PlayableSpecializationDTO;
+import fr.wowcompanion.openapi.model.RealmDTO;
+import fr.wowcompanion.openapi.model.SpecializationRoleDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;

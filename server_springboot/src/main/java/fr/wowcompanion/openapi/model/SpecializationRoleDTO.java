@@ -1,10 +1,10 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.LocalizedDTO;
+import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -16,19 +16,22 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * RealmRegionDTO
+ * SpecializationRoleDTO
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-public class RealmRegionDTO   {
+public class SpecializationRoleDTO   {
 
   @JsonProperty("id")
   private Integer id;
 
+  @JsonProperty("type")
+  private String type;
+
   @JsonProperty("localizedDTO")
   private LocalizedDTO localizedDTO;
 
-  public RealmRegionDTO id(Integer id) {
+  public SpecializationRoleDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -47,7 +50,26 @@ public class RealmRegionDTO   {
     this.id = id;
   }
 
-  public RealmRegionDTO localizedDTO(LocalizedDTO localizedDTO) {
+  public SpecializationRoleDTO type(String type) {
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   * @return type
+  */
+  @NotNull 
+  @Schema(name = "type", required = true)
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public SpecializationRoleDTO localizedDTO(LocalizedDTO localizedDTO) {
     this.localizedDTO = localizedDTO;
     return this;
   }
@@ -74,21 +96,23 @@ public class RealmRegionDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RealmRegionDTO realmRegionDTO = (RealmRegionDTO) o;
-    return Objects.equals(this.id, realmRegionDTO.id) &&
-        Objects.equals(this.localizedDTO, realmRegionDTO.localizedDTO);
+    SpecializationRoleDTO specializationRoleDTO = (SpecializationRoleDTO) o;
+    return Objects.equals(this.id, specializationRoleDTO.id) &&
+        Objects.equals(this.type, specializationRoleDTO.type) &&
+        Objects.equals(this.localizedDTO, specializationRoleDTO.localizedDTO);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, localizedDTO);
+    return Objects.hash(id, type, localizedDTO);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RealmRegionDTO {\n");
+    sb.append("class SpecializationRoleDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
     sb.append("}");
     return sb.toString();

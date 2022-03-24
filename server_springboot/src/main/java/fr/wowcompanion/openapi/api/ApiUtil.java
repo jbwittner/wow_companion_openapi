@@ -1,4 +1,4 @@
-package fr.myguild.server.generated.api;
+package fr.wowcompanion.openapi.api;
 
 import org.springframework.web.context.request.NativeWebRequest;
 

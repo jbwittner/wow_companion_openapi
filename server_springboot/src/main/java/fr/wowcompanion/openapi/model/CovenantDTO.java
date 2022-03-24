@@ -1,10 +1,10 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.LocalizedDTO;
+import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -16,22 +16,22 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * RealmCategoryDTO
+ * CovenantDTO
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-public class RealmCategoryDTO   {
+public class CovenantDTO   {
 
   @JsonProperty("id")
   private Integer id;
 
-  @JsonProperty("slug")
-  private String slug;
+  @JsonProperty("mediaURL")
+  private String mediaURL;
 
   @JsonProperty("localizedDTO")
   private LocalizedDTO localizedDTO;
 
-  public RealmCategoryDTO id(Integer id) {
+  public CovenantDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -50,26 +50,26 @@ public class RealmCategoryDTO   {
     this.id = id;
   }
 
-  public RealmCategoryDTO slug(String slug) {
-    this.slug = slug;
+  public CovenantDTO mediaURL(String mediaURL) {
+    this.mediaURL = mediaURL;
     return this;
   }
 
   /**
-   * Get slug
-   * @return slug
+   * Get mediaURL
+   * @return mediaURL
   */
   @NotNull 
-  @Schema(name = "slug", required = true)
-  public String getSlug() {
-    return slug;
+  @Schema(name = "mediaURL", required = true)
+  public String getMediaURL() {
+    return mediaURL;
   }
 
-  public void setSlug(String slug) {
-    this.slug = slug;
+  public void setMediaURL(String mediaURL) {
+    this.mediaURL = mediaURL;
   }
 
-  public RealmCategoryDTO localizedDTO(LocalizedDTO localizedDTO) {
+  public CovenantDTO localizedDTO(LocalizedDTO localizedDTO) {
     this.localizedDTO = localizedDTO;
     return this;
   }
@@ -96,23 +96,23 @@ public class RealmCategoryDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RealmCategoryDTO realmCategoryDTO = (RealmCategoryDTO) o;
-    return Objects.equals(this.id, realmCategoryDTO.id) &&
-        Objects.equals(this.slug, realmCategoryDTO.slug) &&
-        Objects.equals(this.localizedDTO, realmCategoryDTO.localizedDTO);
+    CovenantDTO covenantDTO = (CovenantDTO) o;
+    return Objects.equals(this.id, covenantDTO.id) &&
+        Objects.equals(this.mediaURL, covenantDTO.mediaURL) &&
+        Objects.equals(this.localizedDTO, covenantDTO.localizedDTO);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, slug, localizedDTO);
+    return Objects.hash(id, mediaURL, localizedDTO);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RealmCategoryDTO {\n");
+    sb.append("class CovenantDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    slug: ").append(toIndentedString(slug)).append("\n");
+    sb.append("    mediaURL: ").append(toIndentedString(mediaURL)).append("\n");
     sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
     sb.append("}");
     return sb.toString();

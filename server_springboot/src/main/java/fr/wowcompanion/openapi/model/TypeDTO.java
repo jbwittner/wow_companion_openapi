@@ -1,10 +1,10 @@
-package fr.myguild.server.generated.model;
+package fr.wowcompanion.openapi.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.myguild.server.generated.model.LocalizedDTO;
+import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -16,11 +16,11 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * SpecializationRoleDTO
+ * TypeDTO
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-public class SpecializationRoleDTO   {
+public class TypeDTO   {
 
   @JsonProperty("id")
   private Integer id;
@@ -31,7 +31,7 @@ public class SpecializationRoleDTO   {
   @JsonProperty("localizedDTO")
   private LocalizedDTO localizedDTO;
 
-  public SpecializationRoleDTO id(Integer id) {
+  public TypeDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -50,7 +50,7 @@ public class SpecializationRoleDTO   {
     this.id = id;
   }
 
-  public SpecializationRoleDTO type(String type) {
+  public TypeDTO type(String type) {
     this.type = type;
     return this;
   }
@@ -69,7 +69,7 @@ public class SpecializationRoleDTO   {
     this.type = type;
   }
 
-  public SpecializationRoleDTO localizedDTO(LocalizedDTO localizedDTO) {
+  public TypeDTO localizedDTO(LocalizedDTO localizedDTO) {
     this.localizedDTO = localizedDTO;
     return this;
   }
@@ -96,10 +96,10 @@ public class SpecializationRoleDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SpecializationRoleDTO specializationRoleDTO = (SpecializationRoleDTO) o;
-    return Objects.equals(this.id, specializationRoleDTO.id) &&
-        Objects.equals(this.type, specializationRoleDTO.type) &&
-        Objects.equals(this.localizedDTO, specializationRoleDTO.localizedDTO);
+    TypeDTO typeDTO = (TypeDTO) o;
+    return Objects.equals(this.id, typeDTO.id) &&
+        Objects.equals(this.type, typeDTO.type) &&
+        Objects.equals(this.localizedDTO, typeDTO.localizedDTO);
   }
 
   @Override
@@ -110,7 +110,7 @@ public class SpecializationRoleDTO   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SpecializationRoleDTO {\n");
+    sb.append("class TypeDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
