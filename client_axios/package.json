@@ -14,6 +14,13 @@
   },
   "author": "WITTNER Jean-Baptiste",
   "license": "ISC",
+  "keywords": [
+    "axios",
+    "typescript",
+    "openapi-client",
+    "openapi-generator",
+    "wow-companion"
+  ],
   "dependencies": {
     "axios": "^0.21.4"
   },
