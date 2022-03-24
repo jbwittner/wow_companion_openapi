@@ -1,0 +1,502 @@
+openapi: 3.0.3
+info:
+  title: Swagger WoW Comanion
+  version: 0.1.0
+security:
+  - oAuthSample: []
+tags:
+  - name: Blizzard Data
+  - name: User
+  - name: Authentication
+  - name: Character
+paths:
+  /authentication/isConnected:
+    get:
+      tags:
+        - Authentication
+      operationId: testConnection
+      responses:
+        '200':
+          description: successful operation
+  /authentication/isRegistred:
+    get:
+      tags:
+        - Authentication
+      operationId: testRegistration
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /blizzardData/fetchStaticData:
+    get:
+      tags:
+        - Blizzard Data
+      summary: Fetch static data
+      operationId: fetchStaticData
+      responses:
+        '200':
+          description: successful operation
+  /blizzardData/getStaticData:
+    get:
+      tags:
+        - Blizzard Data
+      summary: Get static data
+      operationId: getStaticData
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaticDataDTO'
+  /user/registration:
+    post:
+      tags:
+        - User
+      summary: Register new account
+      operationId: userRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationParameter'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+  /character/fetchCharacters:
+    get:
+      tags:
+        - User
+      summary: Fetch characters from account
+      operationId: fetchCharacters
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterArrayDTO'
+  /character/getCharacters:
+    get:
+      tags:
+        - User
+      summary: Get characters from account
+      operationId: getCharacters
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterArrayDTO'
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get user informations
+      operationId: getUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+components:
+  securitySchemes:
+    oAuthSample:
+      type: oauth2
+      description: >-
+        This API uses OAuth 2 with the implicit grant flow. [More
+        info](https://api.example.com/docs/auth)
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://eu.battle.net/oauth/authorize'
+          tokenUrl: 'https://eu.battle.net/oauth/token'
+          scopes:
+            wow.profile: wow profile
+  schemas:
+    ExceptionDTO:
+      type: object
+      properties:
+        details:
+          type: string
+        exception:
+          type: string
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      required:
+        - details
+        - exception
+        - message
+        - timestamp
+    UserDTO:
+      type: object
+      properties:
+        userName:
+          type: string
+        email:
+          type: string
+          format: email
+        battletag:
+          type: string
+        blizzardId:
+          type: integer
+        isAdmin:
+          type: boolean
+      required:
+        - userName
+        - email
+        - battletag
+        - blizzardId
+        - isAdmin
+    StaticDataDTO:
+      type: object
+      properties:
+        covenantDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CovenantDTO'
+        playableRaceDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableRaceDTO'
+        factionDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/FactionDTO'
+        playableClassDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableClassDTO'
+        playableSpecializationDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableSpecializationDTO'
+        specializationRoleDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecializationRoleDTO'
+        realmDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealmDTO'
+      required:
+        - covenantDTOs
+        - playableRaceDTOs
+        - factionDTOs
+        - playableClassDTOs
+        - playableSpecializationDTOs
+        - specializationRoleDTOs
+        - realmDTOs
+    RealmDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        timezone:
+          type: string
+        locale:
+          type: string
+        realmTypeDTO:
+          $ref: '#/components/schemas/TypeDTO'
+        realmRegionDTO:
+          $ref: '#/components/schemas/RealmRegionDTO'
+        realmCategoryDTO:
+          $ref: '#/components/schemas/RealmCategoryDTO'
+      required:
+        - id
+        - slug
+        - timezone
+        - locale
+        - realmTypeDTO
+        - realmRegionDTO
+        - realmCategoryDTO
+    RealmRegionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - localizedDTO
+    RealmCategoryDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - slug
+        - localizedDTO
+    CovenantDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        mediaURL:
+          type: string
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - mediaURL
+        - localizedDTO
+    PlayableRaceDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        factionDTO:
+          $ref: '#/components/schemas/FactionDTO'
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - factionDTO
+        - localizedDTO
+    FactionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - type
+        - localizedDTO
+    PlayableClassDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        mediaURL:
+          type: string
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+        playableSpecializationDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableSpecializationDTO'
+      required:
+        - id
+        - mediaURL
+        - localizedDTO
+        - playableSpecializationDTOs
+    PlayableSpecializationDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        mediaURL:
+          type: string
+        playableClassId:
+          type: integer
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+        specializationRoleDTO:
+          $ref: '#/components/schemas/SpecializationRoleDTO'
+      required:
+        - id
+        - mediaURL
+        - playableClassId
+        - localizedDTO
+        - specializationRoleDTO
+    SpecializationRoleDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - type
+        - localizedDTO
+    UserAccountIndexDTO:
+      type: object
+      properties:
+        blizzardId:
+          type: integer
+        userName:
+          type: string
+      required:
+        - blizzardId
+        - userName
+    CharacterArrayDTO:
+      type: object
+      properties:
+        characterDTOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterDTO'
+    CharacterDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        level:
+          type: integer
+        realmDTO:
+          $ref: '#/components/schemas/RealmDTO'
+        playableClassDTO:
+          $ref: '#/components/schemas/PlayableClassDTO'
+        playableRaceDTO:
+          $ref: '#/components/schemas/PlayableRaceDTO'
+        covenantProgressDTO:
+          $ref: '#/components/schemas/CovenantProgressDTO'
+        factionDTO:
+          $ref: '#/components/schemas/FactionDTO'
+        guildIndexDTO:
+          $ref: '#/components/schemas/GuildIndexDTO'
+        userAccountIndexDTO:
+          $ref: '#/components/schemas/UserAccountIndexDTO'
+        isFavorite:
+          type: boolean
+        averageItemLevel:
+          type: integer
+        equippedItemLevel:
+          type: integer
+        lastLoginTimestamp:
+          type: integer
+          format: int64
+        isActive:
+          type: boolean
+        mediaAvatarURL:
+          type: string
+        mediaInsetURL:
+          type: string
+        mediaMainURL:
+          type: string
+      required:
+        - id
+        - name
+        - integer
+        - realmDTO
+        - playableClassDTO
+        - playableRaceDTO
+        - factionDTO
+        - isFavorite
+        - isActive
+    CovenantProgressDTO:
+      type: object
+      description: Covenant progress DTO
+      properties:
+        covenantDTO:
+          $ref: '#/components/schemas/CovenantDTO'
+        renown_level:
+          type: integer
+      required:
+        - chosen_covenant
+        - renown_level
+    GuildIndexDTO:
+      type: object
+      description: Guild index DTO
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        realmDTO:
+          $ref: '#/components/schemas/RealmDTO'
+        factionDTO:
+          $ref: '#/components/schemas/FactionDTO'
+        useApplication:
+          type: boolean
+      required:
+        - id
+        - name
+        - realmDTO
+        - factionDTO
+        - useApplication
+    UserRegistrationParameter:
+      type: object
+      properties:
+        userName:
+          type: string
+        email:
+          type: string
+          format: email
+          pattern: >-
+            ^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$
+      required:
+        - userName
+        - email
+    TypeDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        localizedDTO:
+          $ref: '#/components/schemas/LocalizedDTO'
+      required:
+        - id
+        - type
+        - localizedDTO
+    LocalizedDTO:
+      type: object
+      properties:
+        enUS:
+          type: string
+        esMX:
+          type: string
+        ptBR:
+          type: string
+        deDE:
+          type: string
+        enGB:
+          type: string
+        esES:
+          type: string
+        frFR:
+          type: string
+        itIT:
+          type: string
+        ruRU:
+          type: string
+        koKR:
+          type: string
+        zhTW:
+          type: string
+        zhCN:
+          type: string
+      required:
+        - enUS
+        - esMX
+        - ptBR
+        - deDE
+        - enGB
+        - esES
+        - frFR
+        - itIT
+        - ruRU
+        - koKR
+        - zhTW
+        - zhCN

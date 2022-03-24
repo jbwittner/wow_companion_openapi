@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+.openapi-generator
+.openapi-generator-ignore
+openapitools.json
+git_push.sh
+
+server_springboot/target
