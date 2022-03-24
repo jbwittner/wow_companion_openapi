@@ -1,13 +1,14 @@
 {
-  "name": "wow-companion-axios-client",
+  "name": "@jbwittner/wow-companion-axios-client",
   "version": "0.1.0",
   "description": "The axios client for WoW Companion application",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "generate": "openapi-generator-cli generate -i ../openapi.yaml -g typescript-axios",
+    "postgenerate" : "rimraf git_push.sh && rimraf .openapi-generator-ignore && rimraf .gitignore && rimraf .openapi-generator && rimraf openapitools.json",
     "clean": "rimraf dist",
-    "delete": "npm run clean && rimraf *.ts && rimraf .npmignore && rimraf .openapi-generator-ignore && rimraf .openapi-generator && rimraf .gitignore && rimraf openapitools.json",
+    "delete": "npm run clean && rimraf *.ts && rimraf .npmignore",
     "build": "tsc",
     "deploy": "npm publish"
   },
@@ -21,11 +22,7 @@
     "typescript": "^4.6.2"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/jbwittner/"
+    "registry": "https://npm.pkg.github.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jbwittner/wow_companion_openapi"
-  }
-
+  "repository": "https://github.com/jbwittner/wow_companion_openapi"
 }
