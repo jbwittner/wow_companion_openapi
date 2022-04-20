@@ -1,18 +1,35 @@
 openapi: 3.0.3
 info:
   title: Swagger WoW Comanion
-  version: 0.1.0
+  version: 0.1.1
 security:
   - oAuthSample: []
 servers:
   - url: http://localhost:8080
     description: Dev server
 tags:
-  - name: Blizzard Data
   - name: User
   - name: Authentication
+  - name: Blizzard data
   - name: Character
 paths:
+#  ----- PATHS  -----------------------------------------------------------------------
+#  ----- USER  ------------------------------------------------------------------------
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get user informations
+      operationId: getUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+#  ----- USER  ------------------------------------------------------------------------
+#  ----- AUTHENTICATION  --------------------------------------------------------------
   /authentication/isConnected:
     get:
       tags:
@@ -47,11 +64,13 @@ paths:
       responses:
         '200':
           description: successful operation
+#  ----- AUTHENTICATION  --------------------------------------------------------------
+#  ----- BLIZZARD DATA  ---------------------------------------------------------------
   /blizzardData/getStaticData:
     get:
       tags:
-        - Blizzard Data
-      summary: Get static data
+        - Blizzard data
+      summary: Get static localizedData
       operationId: getStaticData
       responses:
         '200':
@@ -60,6 +79,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StaticDataDTO'
+#  ----- BLIZZARD DATA  ---------------------------------------------------------------
+#  ----- CHARACTER  -------------------------------------------------------------------
   /character/fetchCharacters:
     get:
       tags:
@@ -90,20 +111,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CharacterDTO'
-  /user:
-    get:
-      tags:
-        - User
-      summary: Get user informations
-      operationId: getUser
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDTO'
+#  ----- CHARACTER  -------------------------------------------------------------------
+#  ----- PATHS  -----------------------------------------------------------------------
 components:
+#  ----- AUTHENTICATION  --------------------------------------------------------------
   securitySchemes:
     oAuthSample:
       type: oauth2
@@ -116,7 +127,10 @@ components:
           tokenUrl: 'https://eu.battle.net/oauth/token'
           scopes:
             wow.profile: wow profile
+#  ----- AUTHENTICATION  --------------------------------------------------------------
+#  ----- SCHEMA  ----------------------------------------------------------------------
   schemas:
+#  ----- DTO  -------------------------------------------------------------------------
     ExceptionDTO:
       type: object
       properties:
@@ -221,11 +235,11 @@ components:
       properties:
         id:
           type: integer
-        data:
+        localizedData:
           type: string
       required:
         - id
-        - data
+        - localizedData
     RealmCategoryDTO:
       type: object
       properties:
@@ -233,12 +247,12 @@ components:
           type: integer
         slug:
           type: string
-        data:
+        localizedData:
           type: string
       required:
         - id
         - slug
-        - data
+        - localizedData
     CovenantDTO:
       type: object
       properties:
@@ -246,12 +260,12 @@ components:
           type: integer
         mediaURL:
           type: string
-        data:
+        localizedData:
           type: string
       required:
         - id
         - mediaURL
-        - data
+        - localizedData
     PlayableRaceDTO:
       type: object
       properties:
@@ -259,12 +273,12 @@ components:
           type: integer
         factionDTO:
           $ref: '#/components/schemas/FactionDTO'
-        data:
+        localizedData:
           type: string
       required:
         - id
         - factionDTO
-        - data
+        - localizedData
     FactionDTO:
       type: object
       properties:
@@ -272,7 +286,7 @@ components:
           type: integer
         type:
           type: string
-        data:
+        localizedData:
           type: string
       required:
         - id
@@ -285,7 +299,7 @@ components:
           type: integer
         mediaURL:
           type: string
-        data:
+        localizedData:
           type: string
         playableSpecializationDTOs:
           type: array
@@ -294,7 +308,7 @@ components:
       required:
         - id
         - mediaURL
-        - data
+        - localizedData
         - playableSpecializationDTOs
     PlayableSpecializationDTO:
       type: object
@@ -305,7 +319,7 @@ components:
           type: string
         playableClassId:
           type: integer
-        data:
+        localizedData:
           type: string
         specializationRoleDTO:
           $ref: '#/components/schemas/SpecializationRoleDTO'
@@ -313,7 +327,7 @@ components:
         - id
         - mediaURL
         - playableClassId
-        - data
+        - localizedData
         - specializationRoleDTO
     SpecializationRoleDTO:
       type: object
@@ -322,12 +336,12 @@ components:
           type: integer
         type:
           type: string
-        data:
+        localizedData:
           type: string
       required:
         - id
         - type
-        - data
+        - localizedData
     UserAccountIndexDTO:
       type: object
       properties:
@@ -421,6 +435,8 @@ components:
         - realmDTO
         - factionDTO
         - useApplication
+#  ----- DTO  -------------------------------------------------------------------------
+#  ----- PARAMETER  -------------------------------------------------------------------
     UserRegistrationParameter:
       type: object
       properties:
@@ -434,27 +450,5 @@ components:
       required:
         - userName
         - email
-  parameters:
-    locale:
-      in: query
-      name: locale
-      required: false
-      description: >-
-        The locale to reflect in localized data. (If you don't send a value, the
-        API send you default localized data (en_US))
-      schema:
-        type: string
-        enum:
-          - en_US
-          - es_MX
-          - pt_BR
-          - de_DE
-          - en_GB
-          - es_ES
-          - fr_FR
-          - it_IT
-          - ru_RU
-          - ko_KR
-          - zh_TW
-          - zh_CN
-        example: en_US
+#  ----- PARAMETER  -------------------------------------------------------------------
+#  ----- SCHEMA  ----------------------------------------------------------------------
