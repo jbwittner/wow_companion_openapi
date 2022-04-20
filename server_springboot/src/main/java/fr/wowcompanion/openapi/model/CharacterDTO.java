@@ -9,6 +9,7 @@ import fr.wowcompanion.openapi.model.FactionDTO;
 import fr.wowcompanion.openapi.model.GuildIndexDTO;
 import fr.wowcompanion.openapi.model.PlayableClassDTO;
 import fr.wowcompanion.openapi.model.PlayableRaceDTO;
+import fr.wowcompanion.openapi.model.PlayableSpecializationDTO;
 import fr.wowcompanion.openapi.model.RealmDTO;
 import fr.wowcompanion.openapi.model.UserAccountIndexDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -36,6 +37,9 @@ public class CharacterDTO   {
 
   @JsonProperty("level")
   private Integer level;
+
+  @JsonProperty("mainSpecilization")
+  private PlayableSpecializationDTO mainSpecilization;
 
   @JsonProperty("realmDTO")
   private RealmDTO realmDTO;
@@ -137,6 +141,25 @@ public class CharacterDTO   {
 
   public void setLevel(Integer level) {
     this.level = level;
+  }
+
+  public CharacterDTO mainSpecilization(PlayableSpecializationDTO mainSpecilization) {
+    this.mainSpecilization = mainSpecilization;
+    return this;
+  }
+
+  /**
+   * Get mainSpecilization
+   * @return mainSpecilization
+  */
+  @Valid 
+  @Schema(name = "mainSpecilization", required = false)
+  public PlayableSpecializationDTO getMainSpecilization() {
+    return mainSpecilization;
+  }
+
+  public void setMainSpecilization(PlayableSpecializationDTO mainSpecilization) {
+    this.mainSpecilization = mainSpecilization;
   }
 
   public CharacterDTO realmDTO(RealmDTO realmDTO) {
@@ -436,6 +459,7 @@ public class CharacterDTO   {
     return Objects.equals(this.id, characterDTO.id) &&
         Objects.equals(this.name, characterDTO.name) &&
         Objects.equals(this.level, characterDTO.level) &&
+        Objects.equals(this.mainSpecilization, characterDTO.mainSpecilization) &&
         Objects.equals(this.realmDTO, characterDTO.realmDTO) &&
         Objects.equals(this.playableClassDTO, characterDTO.playableClassDTO) &&
         Objects.equals(this.playableRaceDTO, characterDTO.playableRaceDTO) &&
@@ -455,7 +479,7 @@ public class CharacterDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, level, realmDTO, playableClassDTO, playableRaceDTO, covenantProgressDTO, factionDTO, guildIndexDTO, userAccountIndexDTO, isFavorite, averageItemLevel, equippedItemLevel, lastLoginTimestamp, isActive, mediaAvatarURL, mediaInsetURL, mediaMainURL);
+    return Objects.hash(id, name, level, mainSpecilization, realmDTO, playableClassDTO, playableRaceDTO, covenantProgressDTO, factionDTO, guildIndexDTO, userAccountIndexDTO, isFavorite, averageItemLevel, equippedItemLevel, lastLoginTimestamp, isActive, mediaAvatarURL, mediaInsetURL, mediaMainURL);
   }
 
   @Override
@@ -465,6 +489,7 @@ public class CharacterDTO   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    level: ").append(toIndentedString(level)).append("\n");
+    sb.append("    mainSpecilization: ").append(toIndentedString(mainSpecilization)).append("\n");
     sb.append("    realmDTO: ").append(toIndentedString(realmDTO)).append("\n");
     sb.append("    playableClassDTO: ").append(toIndentedString(playableClassDTO)).append("\n");
     sb.append("    playableRaceDTO: ").append(toIndentedString(playableRaceDTO)).append("\n");

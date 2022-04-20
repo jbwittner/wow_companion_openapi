@@ -5,6 +5,7 @@
  */
 package fr.wowcompanion.openapi.api;
 
+import fr.wowcompanion.openapi.model.UserRegistrationParameter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -86,6 +87,36 @@ public interface AuthenticationApi {
     )
     default ResponseEntity<Boolean> testRegistration(
         
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * POST /authentication/registration : Register new account
+     *
+     * @param userRegistrationParameter  (optional)
+     * @return successful operation (status code 200)
+     */
+    @Operation(
+        operationId = "userRegistration",
+        summary = "Register new account",
+        tags = { "Authentication" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "successful operation")
+        },
+        security = {
+            @SecurityRequirement(name = "oAuthSample", scopes={  })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/authentication/registration",
+        consumes = { "application/json" }
+    )
+    default ResponseEntity<Void> userRegistration(
+        @Parameter(name = "UserRegistrationParameter", description = "", schema = @Schema(description = "")) @Valid @RequestBody(required = false) UserRegistrationParameter userRegistrationParameter
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
