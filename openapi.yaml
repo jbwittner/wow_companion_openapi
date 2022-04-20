@@ -1,15 +1,35 @@
 openapi: 3.0.3
 info:
   title: Swagger WoW Comanion
-  version: 0.1.0
+  version: 0.1.1
 security:
   - oAuthSample: []
+servers:
+  - url: http://localhost:8080
+    description: Dev server
 tags:
-  - name: Blizzard Data
   - name: User
   - name: Authentication
+  - name: Blizzard data
   - name: Character
 paths:
+#  ----- PATHS  -----------------------------------------------------------------------
+#  ----- USER  ------------------------------------------------------------------------
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get user informations
+      operationId: getUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+#  ----- USER  ------------------------------------------------------------------------
+#  ----- AUTHENTICATION  --------------------------------------------------------------
   /authentication/isConnected:
     get:
       tags:
@@ -30,32 +50,10 @@ paths:
             application/json:
               schema:
                 type: boolean
-  /blizzardData/fetchStaticData:
-    get:
-      tags:
-        - Blizzard Data
-      summary: Fetch static data
-      operationId: fetchStaticData
-      responses:
-        '200':
-          description: successful operation
-  /blizzardData/getStaticData:
-    get:
-      tags:
-        - Blizzard Data
-      summary: Get static data
-      operationId: getStaticData
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StaticDataDTO'
-  /user/registration:
+  /authentication/registration:
     post:
       tags:
-        - User
+        - Authentication
       summary: Register new account
       operationId: userRegistration
       requestBody:
@@ -66,14 +64,27 @@ paths:
       responses:
         '200':
           description: successful operation
+#  ----- AUTHENTICATION  --------------------------------------------------------------
+#  ----- BLIZZARD DATA  ---------------------------------------------------------------
+  /blizzardData/getStaticData:
+    get:
+      tags:
+        - Blizzard data
+      summary: Get static localizedData
+      operationId: getStaticData
+      responses:
+        '200':
+          description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: '#/components/schemas/StaticDataDTO'
+#  ----- BLIZZARD DATA  ---------------------------------------------------------------
+#  ----- CHARACTER  -------------------------------------------------------------------
   /character/fetchCharacters:
     get:
       tags:
-        - User
+        - Character
       summary: Fetch characters from account
       operationId: fetchCharacters
       responses:
@@ -82,11 +93,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharacterArrayDTO'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CharacterDTO'
   /character/getCharacters:
     get:
       tags:
-        - User
+        - Character
       summary: Get characters from account
       operationId: getCharacters
       responses:
@@ -95,21 +108,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharacterArrayDTO'
-  /user:
-    get:
-      tags:
-        - User
-      summary: Get user informations
-      operationId: getUser
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDTO'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CharacterDTO'
+#  ----- CHARACTER  -------------------------------------------------------------------
+#  ----- PATHS  -----------------------------------------------------------------------
 components:
+#  ----- AUTHENTICATION  --------------------------------------------------------------
   securitySchemes:
     oAuthSample:
       type: oauth2
@@ -122,7 +127,10 @@ components:
           tokenUrl: 'https://eu.battle.net/oauth/token'
           scopes:
             wow.profile: wow profile
+#  ----- AUTHENTICATION  --------------------------------------------------------------
+#  ----- SCHEMA  ----------------------------------------------------------------------
   schemas:
+#  ----- DTO  -------------------------------------------------------------------------
     ExceptionDTO:
       type: object
       properties:
@@ -210,8 +218,6 @@ components:
           type: string
         locale:
           type: string
-        realmTypeDTO:
-          $ref: '#/components/schemas/TypeDTO'
         realmRegionDTO:
           $ref: '#/components/schemas/RealmRegionDTO'
         realmCategoryDTO:
@@ -229,11 +235,11 @@ components:
       properties:
         id:
           type: integer
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
       required:
         - id
-        - localizedDTO
+        - localizedData
     RealmCategoryDTO:
       type: object
       properties:
@@ -241,12 +247,12 @@ components:
           type: integer
         slug:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
       required:
         - id
         - slug
-        - localizedDTO
+        - localizedData
     CovenantDTO:
       type: object
       properties:
@@ -254,12 +260,12 @@ components:
           type: integer
         mediaURL:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
       required:
         - id
         - mediaURL
-        - localizedDTO
+        - localizedData
     PlayableRaceDTO:
       type: object
       properties:
@@ -267,12 +273,12 @@ components:
           type: integer
         factionDTO:
           $ref: '#/components/schemas/FactionDTO'
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
       required:
         - id
         - factionDTO
-        - localizedDTO
+        - localizedData
     FactionDTO:
       type: object
       properties:
@@ -280,12 +286,12 @@ components:
           type: integer
         type:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
       required:
         - id
         - type
-        - localizedDTO
+        - string
     PlayableClassDTO:
       type: object
       properties:
@@ -293,8 +299,8 @@ components:
           type: integer
         mediaURL:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
         playableSpecializationDTOs:
           type: array
           items:
@@ -302,7 +308,7 @@ components:
       required:
         - id
         - mediaURL
-        - localizedDTO
+        - localizedData
         - playableSpecializationDTOs
     PlayableSpecializationDTO:
       type: object
@@ -313,15 +319,15 @@ components:
           type: string
         playableClassId:
           type: integer
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
         specializationRoleDTO:
           $ref: '#/components/schemas/SpecializationRoleDTO'
       required:
         - id
         - mediaURL
         - playableClassId
-        - localizedDTO
+        - localizedData
         - specializationRoleDTO
     SpecializationRoleDTO:
       type: object
@@ -330,12 +336,12 @@ components:
           type: integer
         type:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        localizedData:
+          type: string
       required:
         - id
         - type
-        - localizedDTO
+        - localizedData
     UserAccountIndexDTO:
       type: object
       properties:
@@ -346,13 +352,6 @@ components:
       required:
         - blizzardId
         - userName
-    CharacterArrayDTO:
-      type: object
-      properties:
-        characterDTOs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterDTO'
     CharacterDTO:
       type: object
       properties:
@@ -362,6 +361,8 @@ components:
           type: string
         level:
           type: integer
+        mainSpecilization:
+          $ref: '#/components/schemas/PlayableSpecializationDTO'
         realmDTO:
           $ref: '#/components/schemas/RealmDTO'
         playableClassDTO:
@@ -434,6 +435,8 @@ components:
         - realmDTO
         - factionDTO
         - useApplication
+#  ----- DTO  -------------------------------------------------------------------------
+#  ----- PARAMETER  -------------------------------------------------------------------
     UserRegistrationParameter:
       type: object
       properties:
@@ -447,56 +450,5 @@ components:
       required:
         - userName
         - email
-    TypeDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
-      required:
-        - id
-        - type
-        - localizedDTO
-    LocalizedDTO:
-      type: object
-      properties:
-        enUS:
-          type: string
-        esMX:
-          type: string
-        ptBR:
-          type: string
-        deDE:
-          type: string
-        enGB:
-          type: string
-        esES:
-          type: string
-        frFR:
-          type: string
-        itIT:
-          type: string
-        ruRU:
-          type: string
-        koKR:
-          type: string
-        zhTW:
-          type: string
-        zhCN:
-          type: string
-      required:
-        - enUS
-        - esMX
-        - ptBR
-        - deDE
-        - enGB
-        - esES
-        - frFR
-        - itIT
-        - ruRU
-        - koKR
-        - zhTW
-        - zhCN
+#  ----- PARAMETER  -------------------------------------------------------------------
+#  ----- SCHEMA  ----------------------------------------------------------------------

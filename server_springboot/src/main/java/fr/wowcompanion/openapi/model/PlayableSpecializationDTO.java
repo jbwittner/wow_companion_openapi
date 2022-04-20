@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.wowcompanion.openapi.model.LocalizedDTO;
 import fr.wowcompanion.openapi.model.SpecializationRoleDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -32,8 +31,8 @@ public class PlayableSpecializationDTO   {
   @JsonProperty("playableClassId")
   private Integer playableClassId;
 
-  @JsonProperty("localizedDTO")
-  private LocalizedDTO localizedDTO;
+  @JsonProperty("localizedData")
+  private String localizedData;
 
   @JsonProperty("specializationRoleDTO")
   private SpecializationRoleDTO specializationRoleDTO;
@@ -95,23 +94,23 @@ public class PlayableSpecializationDTO   {
     this.playableClassId = playableClassId;
   }
 
-  public PlayableSpecializationDTO localizedDTO(LocalizedDTO localizedDTO) {
-    this.localizedDTO = localizedDTO;
+  public PlayableSpecializationDTO localizedData(String localizedData) {
+    this.localizedData = localizedData;
     return this;
   }
 
   /**
-   * Get localizedDTO
-   * @return localizedDTO
+   * Get localizedData
+   * @return localizedData
   */
-  @NotNull @Valid 
-  @Schema(name = "localizedDTO", required = true)
-  public LocalizedDTO getLocalizedDTO() {
-    return localizedDTO;
+  @NotNull 
+  @Schema(name = "localizedData", required = true)
+  public String getLocalizedData() {
+    return localizedData;
   }
 
-  public void setLocalizedDTO(LocalizedDTO localizedDTO) {
-    this.localizedDTO = localizedDTO;
+  public void setLocalizedData(String localizedData) {
+    this.localizedData = localizedData;
   }
 
   public PlayableSpecializationDTO specializationRoleDTO(SpecializationRoleDTO specializationRoleDTO) {
@@ -145,13 +144,13 @@ public class PlayableSpecializationDTO   {
     return Objects.equals(this.id, playableSpecializationDTO.id) &&
         Objects.equals(this.mediaURL, playableSpecializationDTO.mediaURL) &&
         Objects.equals(this.playableClassId, playableSpecializationDTO.playableClassId) &&
-        Objects.equals(this.localizedDTO, playableSpecializationDTO.localizedDTO) &&
+        Objects.equals(this.localizedData, playableSpecializationDTO.localizedData) &&
         Objects.equals(this.specializationRoleDTO, playableSpecializationDTO.specializationRoleDTO);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, mediaURL, playableClassId, localizedDTO, specializationRoleDTO);
+    return Objects.hash(id, mediaURL, playableClassId, localizedData, specializationRoleDTO);
   }
 
   @Override
@@ -161,7 +160,7 @@ public class PlayableSpecializationDTO   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    mediaURL: ").append(toIndentedString(mediaURL)).append("\n");
     sb.append("    playableClassId: ").append(toIndentedString(playableClassId)).append("\n");
-    sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
+    sb.append("    localizedData: ").append(toIndentedString(localizedData)).append("\n");
     sb.append("    specializationRoleDTO: ").append(toIndentedString(specializationRoleDTO)).append("\n");
     sb.append("}");
     return sb.toString();

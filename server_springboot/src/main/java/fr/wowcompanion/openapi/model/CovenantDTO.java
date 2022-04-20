@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -28,8 +27,8 @@ public class CovenantDTO   {
   @JsonProperty("mediaURL")
   private String mediaURL;
 
-  @JsonProperty("localizedDTO")
-  private LocalizedDTO localizedDTO;
+  @JsonProperty("localizedData")
+  private String localizedData;
 
   public CovenantDTO id(Integer id) {
     this.id = id;
@@ -69,23 +68,23 @@ public class CovenantDTO   {
     this.mediaURL = mediaURL;
   }
 
-  public CovenantDTO localizedDTO(LocalizedDTO localizedDTO) {
-    this.localizedDTO = localizedDTO;
+  public CovenantDTO localizedData(String localizedData) {
+    this.localizedData = localizedData;
     return this;
   }
 
   /**
-   * Get localizedDTO
-   * @return localizedDTO
+   * Get localizedData
+   * @return localizedData
   */
-  @NotNull @Valid 
-  @Schema(name = "localizedDTO", required = true)
-  public LocalizedDTO getLocalizedDTO() {
-    return localizedDTO;
+  @NotNull 
+  @Schema(name = "localizedData", required = true)
+  public String getLocalizedData() {
+    return localizedData;
   }
 
-  public void setLocalizedDTO(LocalizedDTO localizedDTO) {
-    this.localizedDTO = localizedDTO;
+  public void setLocalizedData(String localizedData) {
+    this.localizedData = localizedData;
   }
 
   @Override
@@ -99,12 +98,12 @@ public class CovenantDTO   {
     CovenantDTO covenantDTO = (CovenantDTO) o;
     return Objects.equals(this.id, covenantDTO.id) &&
         Objects.equals(this.mediaURL, covenantDTO.mediaURL) &&
-        Objects.equals(this.localizedDTO, covenantDTO.localizedDTO);
+        Objects.equals(this.localizedData, covenantDTO.localizedData);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, mediaURL, localizedDTO);
+    return Objects.hash(id, mediaURL, localizedData);
   }
 
   @Override
@@ -113,7 +112,7 @@ public class CovenantDTO   {
     sb.append("class CovenantDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    mediaURL: ").append(toIndentedString(mediaURL)).append("\n");
-    sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
+    sb.append("    localizedData: ").append(toIndentedString(localizedData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

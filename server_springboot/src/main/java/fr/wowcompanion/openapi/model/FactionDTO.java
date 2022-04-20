@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import fr.wowcompanion.openapi.model.LocalizedDTO;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -28,8 +27,8 @@ public class FactionDTO   {
   @JsonProperty("type")
   private String type;
 
-  @JsonProperty("localizedDTO")
-  private LocalizedDTO localizedDTO;
+  @JsonProperty("localizedData")
+  private String localizedData;
 
   public FactionDTO id(Integer id) {
     this.id = id;
@@ -69,23 +68,23 @@ public class FactionDTO   {
     this.type = type;
   }
 
-  public FactionDTO localizedDTO(LocalizedDTO localizedDTO) {
-    this.localizedDTO = localizedDTO;
+  public FactionDTO localizedData(String localizedData) {
+    this.localizedData = localizedData;
     return this;
   }
 
   /**
-   * Get localizedDTO
-   * @return localizedDTO
+   * Get localizedData
+   * @return localizedData
   */
-  @NotNull @Valid 
-  @Schema(name = "localizedDTO", required = true)
-  public LocalizedDTO getLocalizedDTO() {
-    return localizedDTO;
+  
+  @Schema(name = "localizedData", required = false)
+  public String getLocalizedData() {
+    return localizedData;
   }
 
-  public void setLocalizedDTO(LocalizedDTO localizedDTO) {
-    this.localizedDTO = localizedDTO;
+  public void setLocalizedData(String localizedData) {
+    this.localizedData = localizedData;
   }
 
   @Override
@@ -99,12 +98,12 @@ public class FactionDTO   {
     FactionDTO factionDTO = (FactionDTO) o;
     return Objects.equals(this.id, factionDTO.id) &&
         Objects.equals(this.type, factionDTO.type) &&
-        Objects.equals(this.localizedDTO, factionDTO.localizedDTO);
+        Objects.equals(this.localizedData, factionDTO.localizedData);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, localizedDTO);
+    return Objects.hash(id, type, localizedData);
   }
 
   @Override
@@ -113,7 +112,7 @@ public class FactionDTO   {
     sb.append("class FactionDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    localizedDTO: ").append(toIndentedString(localizedDTO)).append("\n");
+    sb.append("    localizedData: ").append(toIndentedString(localizedData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

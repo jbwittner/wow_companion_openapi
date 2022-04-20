@@ -6,7 +6,6 @@
 package fr.wowcompanion.openapi.api;
 
 import fr.wowcompanion.openapi.model.UserDTO;
-import fr.wowcompanion.openapi.model.UserRegistrationParameter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -62,46 +61,6 @@ public interface UserApi {
     )
     default ResponseEntity<UserDTO> getUser(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"blizzardId\" : 0, \"battletag\" : \"battletag\", \"isAdmin\" : true, \"userName\" : \"userName\", \"email\" : \"email\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * POST /user/registration : Register new account
-     *
-     * @param userRegistrationParameter  (optional)
-     * @return successful operation (status code 200)
-     */
-    @Operation(
-        operationId = "userRegistration",
-        summary = "Register new account",
-        tags = { "User" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(implementation =  UserDTO.class)))
-        },
-        security = {
-            @SecurityRequirement(name = "oAuthSample", scopes={  })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/user/registration",
-        produces = { "application/json" },
-        consumes = { "application/json" }
-    )
-    default ResponseEntity<UserDTO> userRegistration(
-        @Parameter(name = "UserRegistrationParameter", description = "", schema = @Schema(description = "")) @Valid @RequestBody(required = false) UserRegistrationParameter userRegistrationParameter
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
