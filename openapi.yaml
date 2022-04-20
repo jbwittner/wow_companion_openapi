@@ -4,6 +4,9 @@ info:
   version: 0.1.0
 security:
   - oAuthSample: []
+servers:
+  - url: http://localhost:8080
+    description: Dev server
 tags:
   - name: Blizzard Data
   - name: User
@@ -30,12 +33,17 @@ paths:
             application/json:
               schema:
                 type: boolean
-  /blizzardData/fetchStaticData:
-    get:
+  /authentication/registration:
+    post:
       tags:
-        - Blizzard Data
-      summary: Fetch static data
-      operationId: fetchStaticData
+        - Authentication
+      summary: Register new account
+      operationId: userRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationParameter'
       responses:
         '200':
           description: successful operation
@@ -52,28 +60,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StaticDataDTO'
-  /user/registration:
-    post:
-      tags:
-        - User
-      summary: Register new account
-      operationId: userRegistration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserRegistrationParameter'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDTO'
   /character/fetchCharacters:
     get:
       tags:
-        - User
+        - Character
       summary: Fetch characters from account
       operationId: fetchCharacters
       responses:
@@ -82,11 +72,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharacterArrayDTO'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CharacterDTO'
   /character/getCharacters:
     get:
       tags:
-        - User
+        - Character
       summary: Get characters from account
       operationId: getCharacters
       responses:
@@ -95,7 +87,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharacterArrayDTO'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CharacterDTO'
   /user:
     get:
       tags:
@@ -210,8 +204,6 @@ components:
           type: string
         locale:
           type: string
-        realmTypeDTO:
-          $ref: '#/components/schemas/TypeDTO'
         realmRegionDTO:
           $ref: '#/components/schemas/RealmRegionDTO'
         realmCategoryDTO:
@@ -229,11 +221,11 @@ components:
       properties:
         id:
           type: integer
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
       required:
         - id
-        - localizedDTO
+        - data
     RealmCategoryDTO:
       type: object
       properties:
@@ -241,12 +233,12 @@ components:
           type: integer
         slug:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
       required:
         - id
         - slug
-        - localizedDTO
+        - data
     CovenantDTO:
       type: object
       properties:
@@ -254,12 +246,12 @@ components:
           type: integer
         mediaURL:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
       required:
         - id
         - mediaURL
-        - localizedDTO
+        - data
     PlayableRaceDTO:
       type: object
       properties:
@@ -267,12 +259,12 @@ components:
           type: integer
         factionDTO:
           $ref: '#/components/schemas/FactionDTO'
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
       required:
         - id
         - factionDTO
-        - localizedDTO
+        - data
     FactionDTO:
       type: object
       properties:
@@ -280,12 +272,12 @@ components:
           type: integer
         type:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
       required:
         - id
         - type
-        - localizedDTO
+        - string
     PlayableClassDTO:
       type: object
       properties:
@@ -293,8 +285,8 @@ components:
           type: integer
         mediaURL:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
         playableSpecializationDTOs:
           type: array
           items:
@@ -302,7 +294,7 @@ components:
       required:
         - id
         - mediaURL
-        - localizedDTO
+        - data
         - playableSpecializationDTOs
     PlayableSpecializationDTO:
       type: object
@@ -313,15 +305,15 @@ components:
           type: string
         playableClassId:
           type: integer
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
         specializationRoleDTO:
           $ref: '#/components/schemas/SpecializationRoleDTO'
       required:
         - id
         - mediaURL
         - playableClassId
-        - localizedDTO
+        - data
         - specializationRoleDTO
     SpecializationRoleDTO:
       type: object
@@ -330,12 +322,12 @@ components:
           type: integer
         type:
           type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
+        data:
+          type: string
       required:
         - id
         - type
-        - localizedDTO
+        - data
     UserAccountIndexDTO:
       type: object
       properties:
@@ -346,13 +338,6 @@ components:
       required:
         - blizzardId
         - userName
-    CharacterArrayDTO:
-      type: object
-      properties:
-        characterDTOs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterDTO'
     CharacterDTO:
       type: object
       properties:
@@ -362,6 +347,8 @@ components:
           type: string
         level:
           type: integer
+        mainSpecilization:
+          $ref: '#/components/schemas/PlayableSpecializationDTO'
         realmDTO:
           $ref: '#/components/schemas/RealmDTO'
         playableClassDTO:
@@ -447,56 +434,27 @@ components:
       required:
         - userName
         - email
-    TypeDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-        type:
-          type: string
-        localizedDTO:
-          $ref: '#/components/schemas/LocalizedDTO'
-      required:
-        - id
-        - type
-        - localizedDTO
-    LocalizedDTO:
-      type: object
-      properties:
-        enUS:
-          type: string
-        esMX:
-          type: string
-        ptBR:
-          type: string
-        deDE:
-          type: string
-        enGB:
-          type: string
-        esES:
-          type: string
-        frFR:
-          type: string
-        itIT:
-          type: string
-        ruRU:
-          type: string
-        koKR:
-          type: string
-        zhTW:
-          type: string
-        zhCN:
-          type: string
-      required:
-        - enUS
-        - esMX
-        - ptBR
-        - deDE
-        - enGB
-        - esES
-        - frFR
-        - itIT
-        - ruRU
-        - koKR
-        - zhTW
-        - zhCN
+  parameters:
+    locale:
+      in: query
+      name: locale
+      required: false
+      description: >-
+        The locale to reflect in localized data. (If you don't send a value, the
+        API send you default localized data (en_US))
+      schema:
+        type: string
+        enum:
+          - en_US
+          - es_MX
+          - pt_BR
+          - de_DE
+          - en_GB
+          - es_ES
+          - fr_FR
+          - it_IT
+          - ru_RU
+          - ko_KR
+          - zh_TW
+          - zh_CN
+        example: en_US
